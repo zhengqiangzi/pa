@@ -1,0 +1,175 @@
+<!doctype html>
+<html manifest="IGNORE.manifest">
+<head>
+	<title>过敏专家在线义诊</title>
+	<meta charset="utf-8"/>
+	 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+	
+	<mata desc="开瑞坦联合平安好医生特邀过敏专家义诊"/>
+	
+	
+	<meta name="description" content="开瑞坦联合平安好医生特邀过敏专家义诊">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<script src="./axios.min.js?rand=0225"></script>
+	<script src="./jquery-3.4.1.min.js?rand=0225"></script>
+
+	<style type="text/css">
+		*{
+			box-sizing: border-box;
+		}
+		body{
+			margin:0px;
+			padding:0px;
+			background-color: #d6ecfa;
+
+		}
+		img{
+			display: block;
+			width: 100%;
+		}
+		.header{
+			width:100%;
+			overflow: hidden;
+		}
+		.one-doctor{
+			width: 100%;
+			overflow: hidden;
+		}
+		.one-doctor-left{
+				width: 50%;
+				float: left;
+		}
+		.one-doctor-left img{
+			width: 100%
+		}
+		.one-doctor-right img{
+			width: 100%
+		}
+		
+		.one-doctor-right{
+			width: 50%;
+			float: left;
+		}
+		.title{
+			width: 100%;
+			background-color: #f9f9f9;
+			overflow: hidden;
+		}
+		.title .back-button{
+			float: left;
+		}
+		.title .back-button img{
+			max-width: 40px;
+		}
+		.title-desc{
+
+			width: calc(100% - 40px);
+			text-align: center;
+			line-height: 40px;
+			font-size: 16px;
+			font-weight: bold;
+			color:#333;
+		}
+		.one-doctor-footer{
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+
+	<div>
+		<div class="title">
+			<div class="back-button"><a href="javascript:void(0)" id="backButton"><img src="./arrow-lift.png"/></a></div>
+			<div class="title-desc">过敏专家在线义诊</div>
+
+		</div>
+		<div class="header">
+			<div><img src="./1.jpg?rand=0225"/></div>
+			<div><img src="./2.jpg?rand=0225"/></div>
+			<div><img src="./3.jpg?rand=0225"/></div>
+		</div>
+
+
+		<div class="one-doctor">
+			<div class="one-doctor-left"><a href="https://www.jk.cn/srilanka/#/doctor-detail/151166500003"><img src="./d1.jpg?rand=0225"/></a></div>
+
+			<div class="one-doctor-right"><a href="https://www.jk.cn/srilanka/#/doctor-detail/151441960903"><img src="./d2.jpg?rand=0225"/></a></div>
+
+		</div>
+
+		<div><img src="./s1.jpg?rand=0225"/></div>
+
+		<div class="one-doctor">
+			<div class="one-doctor-left"><a href="https://www.jk.cn/srilanka/#/doctor-detail/151391160609"><img src="./d3.jpg?rand=0225"/></a></div>
+			<div class="one-doctor-right"><a href="https://www.jk.cn/srilanka/#/doctor-detail/151303160405"><img src="./d4.jpg?rand=0225"/></a></div>
+		</div>
+		<div><img src="./s2.jpg?rand=0225"/></div>
+
+		<div class="one-doctor">
+			<div class="one-doctor-left"><a href="https://www.jk.cn/srilanka/#/doctor-detail/151332060708"><img src="./d5.jpg?rand=0225"/></a></div>
+			<div class="one-doctor-right"><a href="https://www.jk.cn/srilanka/#/doctor-detail/151203610702"><img src="./d6.jpg?rand=0225"/></a></div>
+		</div>
+		<div><img src="./s3.jpg?rand=0225"/></div>
+
+		<div class="one-doctor">
+			<div class="one-doctor-left"><a href="https://www.jk.cn/srilanka/#/doctor-detail/151223970406"><img src="./d7.jpg?rand=0225"/>
+			</a></div>
+			<div class="one-doctor-right"><a href="https://www.jk.cn/srilanka/#/doctor-detail/78369280709"><img src="./d8.jpg?rand=0225"/></a></div>
+		</div>
+		<div><img src="./s4.jpg?rand=0225"/></div>
+
+	</div>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js?rand=0225"></script>
+	<script>
+		$(document).ready(function(){
+			$("#backButton").click(function(){
+				history.back()
+			})
+
+
+					    var url =location.href.split('#')[0]//"http://qiang.lingstone.cn";
+					    url = encodeURIComponent(url);
+					    var desc="点击进入问诊专区"
+					    var title="开瑞坦联合平安好医生特邀过敏专家义诊"
+					    axios.post('http://api.qiang.lingstone.cn/api/wx/signature2',{url:url}).then(function(_data){
+					   		var data=_data.data.data
+					   		wx.config({
+					        debug: false, // 开启调试模式,
+					        appId: data.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
+					        timestamp: data.timestamp, // 必填，生成签名的时间戳
+					        nonceStr: data.nonceStr, // 必填，生成签名的随机串
+					        signature: data.signature,// 必填，签名，见附录1
+					        jsApiList: ['updateTimelineShareData', 'updateAppMessageShareData']
+					      });
+
+					      wx.ready(function () {
+					        // let stitle = _this.$store.state.config.articleTitle
+					        // alert(_this.$store.state.config.articleTitle)
+					        wx.updateAppMessageShareData({ 
+					          title: title, // 分享标题
+					          desc: desc, // 分享描述
+					          link: window.location.href, // 分享链接
+					          imgUrl: 'http://qiang.lingstone.cn/share.png', // 分享图标
+					          success: function () {
+					            // 设置成功
+					          }
+					        })
+
+					        wx.updateTimelineShareData({ 
+					          title: title, // 分享标题
+					          desc:desc,
+					          link: window.location.href, // 分享链接
+					          imgUrl: 'http://qiang.lingstone.cn/share.png', // 分享图标
+					          success: function () {
+					            // 设置成功
+					          }
+					        })
+					      }); 
+
+					   })
+            })
+</script>
+</body>
+</html>
