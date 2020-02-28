@@ -64,11 +64,18 @@
 		.one-doctor-footer{
 			width: 100%;
 		}
+		.version{
+			position: fixed;
+			right: 0;
+			top:0;
+			width: 12px;
+			height: 12px;
+		}
 	</style>
 </head>
 <body>
-
-	<div>
+<!-- 	<div class="version">3</div>
+	 -->	<div>
 		<div class="title">
 			<div class="back-button"><a href="javascript:void(0)" id="backButton"><img src="./arrow-lift.png"/></a></div>
 			<div class="title-desc">过敏专家在线义诊</div>
@@ -117,16 +124,27 @@
 	<script>
 		$(document).ready(function(){
 
-			$("#backButton").click(function(){
+			var params = location.href.match(/rand=\d{3,}/gi)
 
-				history.back()
-			})
+				if(! (params instanceof Array)){
+
+					location.href="http://qiang.lingstone.cn/index.html?rand="+Math.ceil(Math.random()*1000)
+					return;
+				}
 
 
-					    var url =location.href.split('#')[0]//"http://qiang.lingstone.cn";
+				$("#backButton").click(function(){
+
+					history.back()
+				})
+
+
+					    //var url ="http://qiang.lingstone.cn"//location.href.split('#')[0]//"http://qiang.lingstone.cn";
+					    var url =location.href.split('#')[0]//location.href.split('#')[0]//"http://qiang.lingstone.cn";
 					    url = encodeURIComponent(url);
 					    var desc="点击进入问诊专区"
 					    var title="开瑞坦联合平安好医生特邀过敏专家义诊"
+					    var share_link="http://qiang.lingstone.cn/index.html?rand="+Math.ceil(Math.random()*1000)
 					    axios.post('http://api.qiang.lingstone.cn/api/wx/signature2',{url:url}).then(function(_data){
 					   		var data=_data.data.data
 					   		wx.config({
@@ -144,7 +162,8 @@
 					        wx.updateAppMessageShareData({ 
 					          title: title, // 分享标题
 					          desc: desc, // 分享描述
-					          link: window.location.href, // 分享链接
+					         // link: window.location.href, // 分享链接
+					          link: share_link, // 分享链接
 					          imgUrl: 'http://qiang.lingstone.cn/share.png', // 分享图标
 					          success: function () {
 					            // 设置成功
@@ -154,7 +173,8 @@
 					        wx.updateTimelineShareData({ 
 					          title: title, // 分享标题
 					          desc:desc,
-					          link: window.location.href, // 分享链接
+					         // link: window.location.href, // 分享链接
+					          link: share_link, // 分享链接
 					          imgUrl: 'http://qiang.lingstone.cn/share.png', // 分享图标
 					          success: function () {
 					            // 设置成功
